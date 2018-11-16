@@ -1,4 +1,4 @@
-package com.pingjin.POIExcel;
+package com.pingjin.poiexcel;
 
 import java.io.File;
 import java.io.FileNotFoundException;

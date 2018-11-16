@@ -1,4 +1,4 @@
-package com.pingjin.HtmlReplace;
+package com.pingjin.htmlreplace;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

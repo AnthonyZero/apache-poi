@@ -1,8 +1,7 @@
-package com.pingjin.POIWord;
+package com.pingjin.poiword;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Bookmark;

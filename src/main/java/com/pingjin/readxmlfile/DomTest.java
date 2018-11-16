@@ -1,4 +1,4 @@
-package com.pingjin.ReadXmlFile;
+package com.pingjin.readxmlfile;
 
 import java.io.InputStream;
 

@@ -1,17 +1,11 @@
-package com.pingjin.Convert;
+package com.pingjin.convert;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
@@ -23,12 +17,31 @@ import org.apache.poi.hwpf.usermodel.Picture;
 import org.apache.poi.hwpf.usermodel.PictureType;
 import org.w3c.dom.Document;
 
+/**
+ * 03word文档转换为静态html文件
+ */
 public class PoiWordToHtml {
 
-	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
+	/**
+	 * F盘 课程.doc 转变为demo.html 文档中图片指定存储路径 img/
+	 * @param args
+	 * @throws IOException
+	 * @throws ParserConfigurationException
+	 * @throws TransformerException
+	 */
+	public static void main(String[] args) throws IOException, ParserConfigurationException, TransformerException {
 		final String path = "F:/";
 		final String file = "课程.doc";
+		final String pictureDir = "img/";
+		File docfile = new File(path, file);
+		if (docfile == null || !docfile.isFile() || !docfile.exists()) {
+			System.out.println("文件不存在");
+			return;
+		}
+		File savePictureDir = new File(path, pictureDir);
+		if (!savePictureDir.exists()) {
+			savePictureDir.mkdirs();
+		}
 		InputStream input = new FileInputStream(path + file);
 		HWPFDocument wordDocument = new HWPFDocument(input);
 		WordToHtmlConverter wordToHtmlConverter = new WordToHtmlConverter(
@@ -36,7 +49,7 @@ public class PoiWordToHtml {
 		wordToHtmlConverter.setPicturesManager(new PicturesManager() {
 			public String savePicture(byte[] content, PictureType pictureType, String suggestedName, float widthInches,
 					float heightInches) {
-				return "test/"+suggestedName;
+				return pictureDir+suggestedName;
 			}
 		});
 		wordToHtmlConverter.processDocument(wordDocument);
@@ -45,7 +58,7 @@ public class PoiWordToHtml {
 			for (int i = 0; i < pics.size(); i++) {
 				Picture pic = (Picture) pics.get(i);
 				try {
-					pic.writeImageContent(new FileOutputStream(path+"test/" + pic.suggestFullFileName()));
+					pic.writeImageContent(new FileOutputStream(path + pictureDir + pic.suggestFullFileName()));
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}

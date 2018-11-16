@@ -1,4 +1,4 @@
-package com.pingjin.Convert;
+package com.pingjin.convert;
 
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -99,7 +99,7 @@ public class WordConvertToHtml {
 	
 	public static void main(String argv[]) {  
         try {  
-            convert2Html("F://demo4.doc","F://4.html");  
+            convert2Html("F://demo.doc","F://4.html");
         } catch (Exception e) {  
             e.printStackTrace();  
         }  

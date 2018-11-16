@@ -1,8 +1,7 @@
-package com.pingjin.POIWord;
+package com.pingjin.poiword;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
